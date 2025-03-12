@@ -1,18 +1,26 @@
 import React from 'react';
+import { registerUser } from '../API/UserApi';
 import DynamicForm from '../components/form';
 
 const Home = () => {
   const userFields = [
-    { name: 'fullName', label: 'Full Name', placeholder: 'Enter your full name', required: true },
+    { name: 'name', label: 'Full Name', placeholder: 'Enter your full name', required: true },
     { name: 'email', label: 'Email Address', type: 'email', placeholder: 'you@example.com', required: true },
-    { name: 'password', label: 'Password', placeholder: 'password', required: true },
-    { name: 'contactNumber', label: 'Contact Number', placeholder: '+123456789', required: true },
+    { name: 'phone', label: 'Contact Number', placeholder: '+123456789', required: true },
     
   ];
 
-  const handleSubmit = (data) => {
-    console.log('Submitted user data:', data);
-    // Implement your submission logic here, e.g., API call
+  const handleSubmit = async (data) => {
+    console.log("Submitting user data:", data); // Debugging log
+  
+    try {
+      const response = await registerUser(data);
+      console.log("Success:", response);
+      alert("User registered successfully!");
+    } catch (error) {
+      console.error("Registration error:", error);
+      alert(error.response?.data?.message || "Something went wrong!");
+    }
   };
 
   return (
@@ -22,10 +30,9 @@ const Home = () => {
         <DynamicForm
           fields={userFields}
           initialValues={{
-            fullName: '',
+            name: '',
             email: '',
-            password: '',
-            contactNumber: '',
+            phone: '',
           }}
           onSubmit={handleSubmit}
           buttonText="Save and Continue"

@@ -5,7 +5,7 @@ const Table = ({ data }) => {
     return <p className="text-gray-500 text-center">No data available</p>;
   }
 
-  // Extract headers dynamically from object keys
+ 
   const headers = Object.keys(data[0]);
 
   return (

@@ -6,7 +6,7 @@ const Cart = () => {
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
-    // Replace this with your actual API endpoint to fetch products
+    
     fetch("/api/products")
       .then((res) => res.json())
       .then((data) => setProducts(data));
@@ -25,7 +25,7 @@ const Cart = () => {
     }
   };
 
-  // Transform products for the table
+ 
   const productTableData = products.map((product) => ({
     Name: product.name,
     Price: `$${product.price}`,
@@ -39,7 +39,7 @@ const Cart = () => {
     ),
   }));
 
-  // Transform cart items for the table (without update/remove options)
+  
   const cartTableData = cart.map((item) => ({
     Name: item.name,
     Price: `$${item.price}`,
@@ -51,13 +51,13 @@ const Cart = () => {
     <div className="flex flex-col w-full p-10">
       <h2 className="text-2xl font-semibold mb-6">Cart Management</h2>
 
-      {/* Product List */}
+      
       <div className="mb-8">
         <h3 className="text-xl font-medium mb-4">Available Products</h3>
         <Table data={productTableData} />
       </div>
 
-      {/* Cart List */}
+     
       <div>
         <h3 className="text-xl font-medium mb-4">Your Cart</h3>
         {cart.length > 0 ? <Table data={cartTableData} /> : <p className="text-gray-500">Your cart is empty.</p>}
